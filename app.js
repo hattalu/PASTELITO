@@ -628,6 +628,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (btnSoplar && !puedeLeerMensajes()) {
         btnSoplar.style.display = 'none';
     }
+    /*if (btnSoplar) {
+        btnSoplar.style.display = puedeLeerMensajes() ? 'block' : 'none';
+    } */
 });
 
 animate();
