@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIPOSITA BONITA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="contenedor-3d"></div>
+
+    <div id="ui">
+        <div id="panel-instrucciones">
+            <p>Haz clic en una vela</p>
+        </div>
+
+        <div id="panel-mensajes" style="display: none;">
+            <h2>FELIZ CUMPLEAÑOS MI AMOR</h2>
+        </div>
+
+        <button id="btn-soplar" style="display: none;">¡Sopla las velas!</button>
+        
+        <div id="panel-grabacion" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h3 style="margin: 0;">Deja tu mensaje</h3>
+                <button id="btn-cerrar-grabacion" style="
+                    background: none;
+                    border: none;
+                    color: white;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    padding: 0 10px;
+                    pointer-events: auto;
+                ">✕</button>
+            </div>
+            <input type="text" id="input-nombre" placeholder="NOMBRE" />
+            <textarea id="input-mensaje" placeholder="ESCRIBAN ALGO BONITO PARA MI ESPOSA"></textarea>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <!--<button id="btn-grabar-voz" style="flex: 1;">Grabar voz</button>-->
+                <button id="btn-enviar-texto" style="flex: 1;">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
