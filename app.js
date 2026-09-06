@@ -257,7 +257,7 @@ function onClick(event) {
         }
 
         mostrarPanelGrabacion();
-        document.getElementById('btn-soplar').style.display = 'block';
+        /*document.getElementById('btn-soplar').style.display = 'block';*/
         
     } else {
         mostrarMensajeTemporal('Haz clic en una vela');
