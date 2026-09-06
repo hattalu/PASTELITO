@@ -38,6 +38,11 @@ let previousMousePosition = { x: 0, y: 0 };
 let rotationVelocity = { x: 0, y: 0 };
 const damping = 0.95;
 
+function puedeLeerMensajes() {
+    const ahora = new Date();
+    return ahora.getMonth() > 8 || (ahora.getMonth() === 8 && ahora.getDate() >= 9);
+}
+
 function crearFuego(vela, index) {
     vela.updateWorldMatrix(true, true);
     const bbox = new THREE.Box3().setFromObject(vela);
@@ -257,7 +262,9 @@ function onClick(event) {
         }
 
         mostrarPanelGrabacion();
-        document.getElementById('btn-soplar').style.display = 'block';
+        if (puedeLeerMensajes()) {
+            document.getElementById('btn-soplar').style.display = 'block';
+        }
         
     } else {
         mostrarMensajeTemporal('Haz clic en una vela');
@@ -579,6 +586,11 @@ function apagarVelas() {
 }
 
 document.getElementById('btn-soplar')?.addEventListener('click', async function () {
+    if (!puedeLeerMensajes()) {
+        this.style.display = 'none';
+        return;
+    }
+
     apagarVelas();
 
     const mensajes = await leerMensajes();
@@ -610,6 +622,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnVoz = document.getElementById('btn-grabar-voz');
     if (btnVoz) {
         btnVoz.style.display = 'none';
+    }
+
+    const btnSoplar = document.getElementById('btn-soplar');
+    if (btnSoplar && !puedeLeerMensajes()) {
+        btnSoplar.style.display = 'none';
     }
 });
 
