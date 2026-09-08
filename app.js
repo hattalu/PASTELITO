@@ -605,14 +605,25 @@ document.getElementById('btn-soplar')?.addEventListener('click', async function 
 });
 
 document.getElementById('btn-cerrar-mensajes')?.addEventListener('click', function () {
-    globosActivos.forEach(globo => globo.remove());
-    globosActivos = [];
-    if (intervaloGlobos) {
-        clearInterval(intervaloGlobos);
-        intervaloGlobos = null;
-    }
     document.getElementById('panel-mensajes').style.display = 'none';
     document.getElementById('panel-instrucciones').style.display = 'block';
+});
+
+document.getElementById('btn-ver-mensajes')?.addEventListener('click', async function () {
+    if (!puedeLeerMensajes()) {
+        this.style.display = 'none';
+        return;
+    }
+
+    const panel = document.getElementById('panel-mensajes');
+    if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+        return;
+    }
+
+    const mensajes = await leerMensajes();
+    mostrarMensajesEnPanel(mensajes);
+    panel.style.display = 'block';
 });
 
 window.addEventListener('resize', () => {
@@ -628,9 +639,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (btnSoplar && !puedeLeerMensajes()) {
         btnSoplar.style.display = 'none';
     }
-    /*if (btnSoplar) {
-        btnSoplar.style.display = puedeLeerMensajes() ? 'block' : 'none';
-    } */
+
+    const btnVerMensajes = document.getElementById('btn-ver-mensajes');
+    if (btnVerMensajes) {
+        btnVerMensajes.style.display = puedeLeerMensajes() ? 'block' : 'none';
+    }
 });
 
 animate();
