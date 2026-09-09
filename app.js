@@ -37,6 +37,7 @@ let isDragging = false;
 let previousMousePosition = { x: 0, y: 0 };
 let rotationVelocity = { x: 0, y: 0 };
 const damping = 0.95;
+let velasSopladas = false;
 
 function puedeLeerMensajes() {
     const ahora = new Date();
@@ -210,6 +211,8 @@ const mouse = new THREE.Vector2();
 let clickTimeout = false;
 
 function onClick(event) {
+    if (event.target !== renderizador.domElement) return;
+    if (velasSopladas) return;
     if (isDragging) return;
     if (clickTimeout) return;
 
@@ -261,7 +264,14 @@ function onClick(event) {
             fuego.material.emissive.setHex(colorAleatorio);
         }
 
-        mostrarPanelGrabacion();
+        ocultarPanelGrabacion();
+        const instrucciones = document.getElementById('panel-instrucciones');
+        const textoInstrucciones = instrucciones?.querySelector('p');
+        if (instrucciones && textoInstrucciones) {
+            textoInstrucciones.textContent = 'Pide un deseo';
+            instrucciones.style.background = 'rgba(0,0,0,0.85)';
+            instrucciones.style.display = 'block';
+        }
         if (puedeLeerMensajes()) {
             document.getElementById('btn-soplar').style.display = 'block';
         }
@@ -592,14 +602,14 @@ document.getElementById('btn-soplar')?.addEventListener('click', async function 
     }
 
     apagarVelas();
+    velasSopladas = true;
 
     const mensajes = await leerMensajes();
 
     mostrarGlobos(mensajes);
 
-    document.getElementById('panel-mensajes').style.display = 'block';
-
     this.style.display = 'none';
+    document.getElementById('btn-ver-mensajes').style.display = 'block';
 
     document.getElementById('panel-instrucciones').style.display = 'none';
 });
@@ -642,7 +652,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const btnVerMensajes = document.getElementById('btn-ver-mensajes');
     if (btnVerMensajes) {
-        btnVerMensajes.style.display = puedeLeerMensajes() ? 'block' : 'none';
+        btnVerMensajes.style.display = 'none';
     }
 });
 

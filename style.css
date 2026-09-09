@@ -56,6 +56,7 @@ body {
     position: absolute;
     top: 24px;
     right: 24px;
+    z-index: 1100;
     padding: 12px 18px;
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 10px;
@@ -66,18 +67,18 @@ body {
 }
 
 #btn-ver-mensajes:hover {
-    background: rgba(255, 165, 0, 0.9);
+    background: rgba(190, 21, 6, 0.9);
 }
 
 #panel-mensajes {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 24px;
+    right: 24px;
+    z-index: 1100;
     background: rgba(0, 0, 0, 0.88);
     padding: 30px;
     border-radius: 20px;
-    max-width: 500px;
+    width: min(500px, calc(100vw - 48px));
     max-height: 70vh;
     overflow-y: auto;
     display: none;
@@ -111,7 +112,7 @@ body {
     transform: translateX(-50%);
     padding: 20px 40px;
     font-size: 2rem;
-    background: linear-gradient(45deg, #ff6b6b, #ffa500);
+    background: linear-gradient(45deg, #222ce6, #00d9ff);
     border: none;
     border-radius: 50px;
     color: white;
@@ -130,12 +131,12 @@ body {
     margin: 10px 0;
     padding: 15px;
     border-radius: 10px;
-    border-left: 4px solid #ffa500;
+    border-left: 4px solid #0073ff;
 }
 
 .mensaje .nombre {
     font-weight: bold;
-    color: #ffa500;
+    color: #007bff;
 }
 
 button {
